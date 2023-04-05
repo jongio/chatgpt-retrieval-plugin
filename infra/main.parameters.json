@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "environmentName": {
+      "value": "${AZURE_ENV_NAME}"
+    },
+    "location": {
+      "value": "${AZURE_LOCATION}"
+    },
+    "principalId": {
+      "value": "${AZURE_PRINCIPAL_ID}"
+    },
+    "webImageName": {
+      "value": "${SERVICE_WEB_IMAGE_NAME}"
+    },
+    "redisImageName": {
+      "value": "${SERVICE_REDIS_IMAGE_NAME}"
+    },
+    "useAPIM": {
+      "value": "${USE_APIM=false}"
+    },
+    "openAiApiKey": {
+      "value": "${OPENAI_API_KEY}"
+    },
+    "redisCacheServiceName": {
+      "value": "${SERVICE_REDIS_NAME}"
+    },
+    "redisCacheUseSslPort": {
+      "value": "${REDIS_CACHE_USE_SSL_PORT}"
+    }
+  }
+}
