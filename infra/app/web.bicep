@@ -57,6 +57,10 @@ module app '../core/host/container-app.bicep' = {
         name: 'REDIS_PASSWORD'
         value: ''
       }
+      {
+        name: 'PORT'
+        value: '80'
+      }
       
       // {
       //   name: 'REACT_APP_APPLICATIONINSIGHTS_CONNECTION_STRING'
