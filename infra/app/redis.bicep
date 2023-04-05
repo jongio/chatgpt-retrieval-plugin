@@ -21,8 +21,8 @@ module app '../core/host/container-app.bicep' = {
     imageName: !empty(imageName) ? imageName : 'redis/redis-stack-server:latest'
     //keyVaultName: keyVault.name
     targetPort: 6379
-    //transport: 'tcp'
-    //external: false
+    transport: 'tcp'
+    external: false
   }
 }
 
