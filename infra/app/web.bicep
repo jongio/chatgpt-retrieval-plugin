@@ -11,7 +11,7 @@ param imageName string = ''
 param serviceName string = 'web'
 
 //param openAiName string = ''
-param redisCacheName string = ''
+param redisCacheServiceName string = ''
 param redisCacheUseSslPort string = 'true'
 
 var redisCachePort = redisCacheUseSslPort == 'false' ? redisCache.properties.port : redisCache.properties.sslPort
@@ -47,7 +47,7 @@ module app '../core/host/container-app.bicep' = {
       }
       {
         name: 'REDIS_HOST'
-        value: redisCacheName
+        value: redisCacheServiceName
       }
       {
         name: 'REDIS_PORT'
@@ -86,7 +86,7 @@ resource applicationInsights 'Microsoft.Insights/components@2020-02-02' existing
 }
 
 resource redisCache 'Microsoft.Cache/redis@2022-06-01' existing = {
-  name: redisCacheName
+  name: redisCacheServiceName
 }
 
 // resource keyVault 'Microsoft.KeyVault/vaults@2022-07-01' existing = {

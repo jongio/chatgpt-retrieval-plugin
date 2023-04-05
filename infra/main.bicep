@@ -88,7 +88,7 @@ module web './app/web.bicep' = {
     containerRegistryName: containerApps.outputs.registryName
     openAiApiKey: openAiApiKey
     // redisCacheName: !empty(redisCacheServiceName) ? redisCacheServiceName : redis.outputs.SERVICE_REDIS_NAME
-    redisCacheName: !empty(redisCacheServiceName) ? redisCacheServiceName : '${abbrs.appContainerApps}redis-${resourceToken}'
+    redisCacheServiceName: !empty(redisCacheServiceName) ? redisCacheServiceName : '${abbrs.appContainerApps}redis-${resourceToken}'
     //keyVaultName: keyVault.outputs.name
   }
   dependsOn: [
