@@ -1,6 +1,7 @@
 open codespace
 azd login --use-device-code
 azd env new {your unique env name}
+azd env set DATASTORE redis
 azd env set BEARER_TOKEN footoken
 azd env set OPENAI_API_KEY {your open ai key}
 azd up
