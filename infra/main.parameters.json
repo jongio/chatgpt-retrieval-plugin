@@ -8,26 +8,50 @@
     "location": {
       "value": "${AZURE_LOCATION}"
     },
-    "principalId": {
-      "value": "${AZURE_PRINCIPAL_ID}"
+    "apiContainerAppName": {
+      "value": "${SERVICE_API_NAME}"
     },
-    "webImageName": {
-      "value": "${SERVICE_WEB_IMAGE_NAME}"
+    "apiImageName": {
+      "value": "${SERVICE_API_IMAGE_NAME}"
     },
-    "redisImageName": {
-      "value": "${SERVICE_REDIS_IMAGE_NAME}"
+    "bearerToken": {
+      "value": "${BEARER_TOKEN}"
     },
-    "useAPIM": {
-      "value": "${USE_APIM=false}"
+    "containerAppsEnvironmentName": {
+      "value": "${AZURE_CONTAINER_ENVIRONMENT_NAME}"
+    },
+    "containerRegistryName": {
+      "value": "${AZURE_CONTAINER_REGISTRY_NAME}"
+    },
+    "datastore": {
+      "value": "${DATASTORE}"
+    },
+    "logAnalyticsName": {
+      "value": "${AZURE_LOG_ANALYTICS_NAME}"
     },
     "openAiApiKey": {
       "value": "${OPENAI_API_KEY}"
     },
-    "redisCacheServiceName": {
-      "value": "${SERVICE_REDIS_NAME}"
+    "redisContainerAppName": {
+      "value": "${SERVICE_API_NAME}"
     },
-    "redisCacheUseSslPort": {
-      "value": "${REDIS_CACHE_USE_SSL_PORT}"
+    "redisContainerPort": {
+      "value": "${REDIS_CONTAINER_PORT=80}"
+    },
+    "redisHost": {
+      "value": "${REDIS_HOST}"
+    },
+    "redisImageName": {
+      "value": "${SERVICE_REDIS_IMAGE_NAME}"
+    },
+    "redisPassword": {
+      "value": "${REDIS_PASSWORD}"
+    },
+    "redisPort": {
+      "value": "${REDIS_PORT=6379}"
+    },
+    "resourceGroupName": {
+      "value": "${AZURE_RESOURCE_GROUP}"
     }
   }
 }

@@ -2,11 +2,11 @@
 
 name: chatgpt-retrieval-plugin
 services:
-  web:
+  api:
     project: ./server
     language: py
     host: containerapp
-    module: app/web
+    module: app/api
     docker:
       path: ../Dockerfile
       context: ../
