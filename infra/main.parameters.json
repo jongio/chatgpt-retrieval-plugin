@@ -33,7 +33,7 @@
       "value": "${OPENAI_API_KEY}"
     },
     "redisContainerAppName": {
-      "value": "${SERVICE_API_NAME}"
+      "value": "${SERVICE_REDIS_NAME}"
     },
     "redisContainerPort": {
       "value": "${REDIS_CONTAINER_PORT=80}"
