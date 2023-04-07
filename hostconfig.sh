@@ -22,12 +22,23 @@ jq --arg plugin_hostname "$PLUGIN_HOSTNAME" '
   .logo_url = ($plugin_hostname + "/.well-known/logo.png")
 ' "$json_input_file" > "$temp_json_file"
 
-# Read the YAML file and perform the substitutions using yq
-yq eval --inplace ".info.servers[0].url = \"$PLUGIN_HOSTNAME\"" "$yaml_input_file"
+# Find the line number where the "servers:" key is located in the YAML file
+servers_line_number=$(grep -n "servers:" "$yaml_input_file" | cut -d: -f1)
+
+# Update the YAML file using sed and awk
+awk -v line_number="$servers_line_number" -v plugin_hostname="$PLUGIN_HOSTNAME" '
+  NR == line_number + 1 {
+    sub(/url: .*/, "url: " plugin_hostname)
+  }
+  { print }
+' "$yaml_input_file" > "$temp_yaml_file"
 
 # Overwrite the original JSON file with the modified contents
 mv "$temp_json_file" "$json_input_file"
 
+# Overwrite the original YAML file with the modified contents
+mv "$temp_yaml_file" "$yaml_input_file"
+
 # Print success messages
-echo "JSON file has been updated successfully."
-echo "YAML file has been updated successfully."
+echo "$json_input_file has been updated successfully."
+echo "$yaml_input_file file has been updated successfully."
