@@ -4,7 +4,7 @@ info:
   description: A retrieval API for querying and filtering documents based on natural language queries and metadata
   version: 1.0.0
   servers:
-    - url: https://jongio-expert-rotary-phone-774wvxj9p6cp64w-8000.preview.app.github.dev
+    - url: https://your-app-url.com
 paths:
   /query:
     post:
