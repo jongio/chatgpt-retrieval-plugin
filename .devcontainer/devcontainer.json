@@ -38,7 +38,7 @@
         8000
     ],
     // "postAttachCommand": "poetry env use python3.10 && poetry install --no-root && source .env && docker compose -f ./examples/docker/redis/docker-compose.yml up -d",
-    "postAttachCommand": "poetry env use python3.10 && poetry install --no-root && export DATASTORE=redis && export BEARER_TOKEN=footoken && export OPENAI_API_KEY='' && docker compose -f ./examples/docker/redis/docker-compose.yml up -d",
+    "postAttachCommand": "poetry env use python3.10 && poetry install --no-root && export DATASTORE=redis && export BEARER_TOKEN=footoken && export OPENAI_API_KEY='' && docker compose -f ./examples/docker/redis/docker-compose.yml up -d && export PLUGIN_HOSTNAME=https://$CODESPACE_NAME-8000.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN && chmod +x ./hostconfig.sh && ./hostconfig.sh",
     "remoteUser": "vscode",
     "hostRequirements": {
         "memory": "8gb"
