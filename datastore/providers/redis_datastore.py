@@ -26,6 +26,8 @@ from models.models import (
 )
 from services.date import to_unix_timestamp
 
+logging.basicConfig(level=logging.INFO)
+
 # Read environment variables for Redis
 REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
 REDIS_PORT = int(os.environ.get("REDIS_PORT", 6379))
@@ -73,8 +75,8 @@ def unpack_schema(d: dict):
 
 
 async def _check_redis_module_exist(client: redis.Redis, modules: List[str]) -> bool:
-    return True
-    print(await client.info())
+    #return True
+    #print(await client.info())
     installed_modules = (await client.info()).get("modules", {"name": ""})
     installed_modules = [m["name"] for m in installed_modules]  # type: ignore
     return all([module in installed_modules for module in modules])
@@ -316,7 +318,8 @@ class RedisDataStore(DataStore):
                 return query_response
 
         # Concurrently gather query results
-        logging.info(f"Gathering {len(queries)} query results", flush=True)  # type: ignore
+        #logging.info(f"Gathering {len(queries)} query results", flush=True)  # type: ignore
+        logging.info(f"Gathering {len(queries)} query results")  # type: ignore
         query_responses = await asyncio.gather(
             *[_single_query(query) for query in queries]
         )
@@ -358,8 +361,17 @@ class RedisDataStore(DataStore):
         if delete_all:
             try:
                 logging.info(f"Deleting all documents from index")
-                await self.client.ft(REDIS_INDEX_NAME).dropindex(True)
-                logging.info(f"Deleted all documents successfully")
+                #await self.client.ft(REDIS_INDEX_NAME).dropindex(True)
+                result = await self.client.ft(REDIS_INDEX_NAME).search("*")
+                if result:
+                    if len(result.docs) > 0:
+                        for doc in result.docs:
+                            await self.client.ft(REDIS_INDEX_NAME).delete_document(doc.id)
+                        logging.info(f"Deleted all documents successfully")
+                    else:
+                        logging.info(f"No documents found in the index")
+                else:
+                    logging.error(f"Failed to retrieve documents from the index")               
                 return True
             except Exception as e:
                 logging.info(f"Error deleting all documents: {e}")

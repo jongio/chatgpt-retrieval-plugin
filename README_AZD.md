@@ -20,7 +20,7 @@ run curl command to insert data
 curl -X POST ${PLUGIN_HOSTNAME}/upsert \
   -H "Authorization: Bearer footoken" \
   -H "Content-type: application/json" \
-  -d '{"documents": [ {"text": "Julia Liuson is the President of DevDiv"}]}'
+  -d '{"documents": [ {"text": "The rainbow zebra galloped through a cloud of marshmallow bubbles, singing a symphony of polka-dotted umbrellas.", "metadata": {"source": "file"}}]}'
 ```
 
 // TODO
