@@ -1,12 +1,8 @@
 {
     "name": "Azure Developer CLI",
-    "build": {
-        "dockerfile": "Dockerfile",
-        "args": {
-            "VARIANT": "bullseye",
-            "VERSION": "3.10"
-        }
-    },
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "features": {
         "ghcr.io/devcontainers/features/docker-from-docker:1": {
             "version": "20.10"
@@ -38,7 +34,7 @@
         8000
     ],
     // "postAttachCommand": "poetry env use python3.10 && poetry install --no-root && source .env && docker compose -f ./examples/docker/redis/docker-compose.yml up -d",
-    "postAttachCommand": "poetry env use python3.10 && poetry install --no-root && export DATASTORE=redis && export BEARER_TOKEN=footoken && export OPENAI_API_KEY='' && docker compose -f ./examples/docker/redis/docker-compose.yml up -d",
+    "postAttachCommand": "poetry env use python3.10 && poetry install --no-root",
     "remoteUser": "vscode",
     "hostRequirements": {
         "memory": "8gb"
