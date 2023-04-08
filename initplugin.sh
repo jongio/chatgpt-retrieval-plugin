@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -e
 
 echo "Adding test data to the Redis cache..."
 

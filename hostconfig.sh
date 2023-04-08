@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -e
 
 # Check if CODESPACES environment variable is set to true
 # Provide a default value of "false" if CODESPACES is not set

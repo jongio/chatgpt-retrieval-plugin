@@ -1,5 +1,5 @@
 #!/bin/sh
-# set -eu
+set -e
 
 poetry env use python3.10 && poetry install --no-root
 
