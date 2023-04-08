@@ -2,7 +2,8 @@
 set -eu
 
 # Check if CODESPACES environment variable is set to true
-if [ "$CODESPACES" = "true" ]; then
+# Provide a default value of "false" if CODESPACES is not set
+if [ "${CODESPACES:-false}" = "true" ]; then
   # If CODESPACES is true and PLUGIN_HOSTNAME is undefined or empty, set PLUGIN_HOSTNAME
   if [ -z "$PLUGIN_HOSTNAME" ]; then
     # Check if CODESPACE_NAME and GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN are set
@@ -20,6 +21,7 @@ else
     exit 1
   fi
 fi
+
 
 # Input JSON file
 json_input_file="./.well-known/ai-plugin.json"

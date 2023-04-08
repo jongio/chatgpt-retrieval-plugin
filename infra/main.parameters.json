@@ -15,7 +15,7 @@
       "value": "${SERVICE_API_IMAGE_NAME}"
     },
     "bearerToken": {
-      "value": "${BEARER_TOKEN}"
+      "value": "${BEARER_TOKEN=footoken}"
     },
     "containerAppsEnvironmentName": {
       "value": "${AZURE_CONTAINER_ENVIRONMENT_NAME}"
@@ -24,7 +24,7 @@
       "value": "${AZURE_CONTAINER_REGISTRY_NAME}"
     },
     "datastore": {
-      "value": "${DATASTORE}"
+      "value": "${DATASTORE=redis}"
     },
     "logAnalyticsName": {
       "value": "${AZURE_LOG_ANALYTICS_NAME}"

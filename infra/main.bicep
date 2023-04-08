@@ -20,7 +20,7 @@ param containerRegistryName string = ''
 param datastore string = 'redis'
 param logAnalyticsName string = ''
 @secure()
-param openAiApiKey string = ''
+param openAiApiKey string
 param redisContainerAppName string = ''
 param redisContainerPort int = 80
 param redisHost string = ''
