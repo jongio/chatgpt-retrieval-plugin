@@ -1,5 +1,6 @@
 # This is a version of the main.py file found in ../../../server/main.py without authentication.
 # Copy and paste this into the main file at ../../../server/main.py if you choose to use no authentication for your retrieval plugin.
+import os
 import uvicorn
 from fastapi import FastAPI, File, HTTPException, Body, UploadFile
 from fastapi.staticfiles import StaticFiles
@@ -15,6 +16,8 @@ from models.api import (
 from datastore.factory import get_datastore
 from services.file import get_document_from_file
 
+# Get the value of PLUGIN_HOSTNAME from the environment variable, or use the default value
+plugin_hostname = os.environ.get('PLUGIN_HOSTNAME', 'https://your-app-url.com')
 
 app = FastAPI()
 app.mount("/.well-known", StaticFiles(directory=".well-known"), name="static")
@@ -24,7 +27,7 @@ sub_app = FastAPI(
     title="Retrieval Plugin API",
     description="A retrieval API for querying and filtering documents based on natural language queries and metadata",
     version="1.0.0",
-    servers=[{"url": "https://your-app-url.com"}],
+    servers=[{"url": plugin_hostname}],
 )
 app.mount("/sub", sub_app)
 
