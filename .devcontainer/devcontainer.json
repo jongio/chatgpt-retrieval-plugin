@@ -8,6 +8,9 @@
         }
     },
     "features": {
+        "ghcr.io/devcontainers/features/azure-cli": {
+            "version": "2.30.0"
+        },
         "ghcr.io/devcontainers/features/docker-from-docker:1": {
             "version": "20.10"
         },
