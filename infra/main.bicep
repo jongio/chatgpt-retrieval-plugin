@@ -13,6 +13,7 @@ param apiContainerAppName string = ''
 param apiImageName string = ''
 param applicationInsightsDashboardName string = ''
 param applicationInsightsName string = ''
+param storageShare string = 'storageshare'
 @secure()
 param bearerToken string
 param containerAppsEnvironmentName string = ''
@@ -41,6 +42,26 @@ resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   tags: tags
 }
 
+module storageAccount './core/storage/storage-account.bicep' = {
+  name: 'storage-account'
+  scope: rg
+  params: {
+    name: '${abbrs.storageStorageAccounts}${resourceToken}'
+    location: location
+    tags: tags
+    kind: 'FileStorage'
+    sku: {
+      name: 'Premium_LRS'
+    }
+    shares: [ 
+      {
+        name: storageShare
+        accessTier: 'Premium'
+      }
+    ]
+  }
+}
+
 // Container apps host (including container registry)
 module containerApps './core/host/container-apps.bicep' = {
   name: 'container-apps'
@@ -52,6 +73,10 @@ module containerApps './core/host/container-apps.bicep' = {
     location: location
     logAnalyticsWorkspaceName: monitoring.outputs.logAnalyticsWorkspaceName
     tags: tags
+    storage: {
+      storageAccountName: storageAccount.outputs.name
+      share: storageShare
+    }
   }
 }
 
@@ -88,6 +113,7 @@ module redis './app/redis.bicep' = {
     containerRegistryName: containerApps.outputs.registryName
     imageName: redisImageName
     redisPort: redisPort
+    storageName: containerApps.outputs.environmentStorage
   }
 }
 
