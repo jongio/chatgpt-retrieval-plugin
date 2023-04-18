@@ -53,10 +53,11 @@ module storageAccount './core/storage/storage-account.bicep' = {
     sku: {
       name: 'Premium_LRS'
     }
-    shares: [ 
+    shares: [
       {
         name: storageShare
         accessTier: 'Premium'
+        enabledProtocols: 'SMB'
       }
     ]
   }

@@ -39,7 +39,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
     resource share 'shares' = [for share in shares: {
       name: share.name
       properties: {
-        enabledProtocols: 'SMB'
+        enabledProtocols: contains(share, 'enabledProtocols') ? share.enabledProtocols : 'SMB'
         accessTier: contains(share, 'accessTier') ? share.accessTier : 'Hot'
       }
     }]
