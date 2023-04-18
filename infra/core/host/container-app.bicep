@@ -12,6 +12,7 @@ param keyVaultName string = ''
 param managedIdentity bool = !empty(keyVaultName)
 param targetPort int = 80
 param transport string = 'auto'
+param storage object = {}
 
 @description('CPU cores allocated to a single container instance, e.g. 0.5')
 param containerCpuCoreCount string = '0.5'
@@ -57,8 +58,21 @@ resource app 'Microsoft.App/containerApps@2022-10-01' = {
             cpu: json(containerCpuCoreCount)
             memory: containerMemory
           }
+          volumeMounts: !empty(storage) ? [
+            {
+              volumeName: 'data'
+              mountPath: storage.mountPath
+            }
+          ] : []
         }
       ]
+      volumes: !empty(storage) ? [
+        {
+          name: 'data'
+          storageType: 'AzureFile'
+          storageName: storage.name
+        }
+      ] : []
     }
   }
 }

@@ -7,6 +7,7 @@ param containerRegistryName string
 param imageName string = ''
 param serviceName string = 'redis'
 param redisPort int = 6379
+param storageName string = ''
 
 module app '../core/host/container-app.bicep' = {
   name: '${serviceName}-container-app-module'
@@ -20,6 +21,11 @@ module app '../core/host/container-app.bicep' = {
     targetPort: redisPort
     transport: 'tcp'
     external: false
+    storage: {
+      name: storageName
+      // ref: ./examples/docker/redis/docker-compose.yml
+      mountPath: '/data'
+    }
   }
 }
 
