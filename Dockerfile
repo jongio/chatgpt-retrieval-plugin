@@ -26,8 +26,8 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY . /code/
 
-COPY entrypoint.sh /entrypoint.sh
-COPY hostconfig.sh /hostconfig.sh
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+COPY hostname-config.sh /hostname-config.sh
 
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
+RUN chmod +x /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]

@@ -20,7 +20,7 @@ export DATASTORE=redis
 export BEARER_TOKEN=footoken 
 export PLUGIN_HOSTNAME=https://$CODESPACE_NAME-8000.$GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN 
 
-./hostconfig.sh
+./hostname-config.sh
 
 echo "Click on GitHub Codespaces PORTS tab.  Right click on port 8000, and set Port Visibility to Public. Once Port 8000 if Public, press Enter to continue..."
 read -r placeholder_var
@@ -29,7 +29,7 @@ echo "Use the following URL to use this plugin in the OpenAI Plugin store:"
 echo $PLUGIN_HOSTNAME
 
 echo "Starting the Plugin API..."
-echo "Once it has started, Open a new terminal and run the ./initplugin.sh file"
+echo "Once it has started, Open a new terminal and run the ./data-seed.sh file"
 echo
 echo
 poetry run start
