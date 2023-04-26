@@ -9,9 +9,9 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://your-app-url.com/.well-known/openapi.yaml"
+    "url": "$PLUGIN_HOSTNAME/.well-known/openapi.yaml"
   },
-  "logo_url": "https://your-app-url.com/.well-known/logo.png",
+  "logo_url": "$PLUGIN_HOSTNAME/.well-known/logo.png",
   "contact_email": "hello@contact.com", 
   "legal_info_url": "hello@legal.com"
 }

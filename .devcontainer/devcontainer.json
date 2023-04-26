@@ -34,6 +34,11 @@
                 "dbaeumer.vscode-eslint",
                 "ms-azuretools.vscode-azurefunctions"
             ]
+        },
+        "codespaces": {
+            "openFiles": [
+                "README_AZD.md"
+            ]
         }
     },
     "forwardPorts": [
