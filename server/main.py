@@ -16,42 +16,14 @@ from models.api import (
 )
 from datastore.factory import get_datastore
 from services.file import get_document_from_file
+from .openai_plugin_hostname import get_plugin_hostname
+from .openai_plugin_routes import router as openai_plugin_router
 
-# Get the value of PLUGIN_HOSTNAME from the environment variable, or use the default value
-plugin_hostname = os.environ.get('PLUGIN_HOSTNAME', 'https://your-app-url.com')
+# Get the hostname, which will vary depending on the environment
+plugin_hostname = get_plugin_hostname()
 
 app = FastAPI()
-
-# Define a generic function to handle file requests
-async def handle_file_request(file_path: str, response_class):
-    try:
-        # Read the contents of the file
-        with open(file_path, "r") as f:
-            file_contents = f.read()
-
-        # Expand environment variables in the file contents
-        expanded_contents = os.path.expandvars(file_contents)
-
-        # Return the expanded contents as a response
-        return response_class(content=expanded_contents)
-    except FileNotFoundError:
-        # If the file is not found, return a 404 error
-        raise HTTPException(status_code=404, detail="File not found")
-
-# Define a route to handle requests to /.well-known/ai-plugin.json
-@app.get("/.well-known/ai-plugin.json")
-async def ai_plugin_json():
-    return await handle_file_request(".well-known/ai-plugin.json", JSONResponse)
-
-# Define a route to handle requests to /.well-known/openapi.yaml
-@app.get("/.well-known/openapi.yaml")
-async def openapi_yaml():
-    return await handle_file_request(".well-known/openapi.yaml", PlainTextResponse)
-
-# Define a route to handle requests to /.well-known/logo.png
-@app.get("/.well-known/logo.png")
-async def logo_png():
-    return FileResponse(".well-known/logo.png")
+app.include_router(openai_plugin_router)
 
 # Create a sub-application, in order to access just the query endpoints in the OpenAPI schema, found at http://0.0.0.0:8000/sub/openapi.json when the app is running locally
 sub_app = FastAPI(

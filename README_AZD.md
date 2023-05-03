@@ -59,7 +59,7 @@
     Run the following to add a document using the azd environment values
 
     ```bash
-    ./data-seed.sh azd
+    python ./server/openai_plugin_seed.py azd
     ```
 
 1. Add Plugin to Chat GPT

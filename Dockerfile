@@ -1,4 +1,3 @@
-
 FROM python:3.10 as requirements-stage
 
 WORKDIR /tmp
@@ -14,20 +13,11 @@ FROM python:3.10
 
 WORKDIR /code
 
-# Install jq using apt-get
-RUN apt-get update && \
-    apt-get install -y jq && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-    
 COPY --from=requirements-stage /tmp/requirements.txt /code/requirements.txt
 
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY . /code/
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-COPY plugin-hostname-config.sh /plugin-hostname-config.sh
-
-RUN chmod +x /docker-entrypoint.sh
-ENTRYPOINT ["/docker-entrypoint.sh"]
+# Heroku uses PORT, Azure App Services uses WEBSITES_PORT, Fly.io uses 8080 by default
+CMD ["sh", "-c", "uvicorn server.main:app --host 0.0.0.0 --port ${PORT:-${WEBSITES_PORT:-8080}}"]
