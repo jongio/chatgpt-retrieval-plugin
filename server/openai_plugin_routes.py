@@ -1,4 +1,5 @@
 import os
+import json  # Import the json module
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import JSONResponse, PlainTextResponse, FileResponse
 
@@ -13,6 +14,10 @@ async def handle_file_request(file_path: str, response_class):
 
         # Expand environment variables in the file contents
         expanded_contents = os.path.expandvars(file_contents)
+
+        # If the response class is JSONResponse, parse the contents into a JSON object
+        if response_class == JSONResponse:
+            expanded_contents = json.loads(expanded_contents)
 
         # Create the response with the expanded contents
         response = response_class(content=expanded_contents)

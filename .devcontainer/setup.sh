@@ -40,11 +40,16 @@ echo "3. Run the following to set that key in your environment"
 echo "   export OPENAI_API_KEY=yourkeyvalue"
 echo
 
-print_header "DATA SEEDING - You must do the following after the API has started:"
-echo "1. Open a new Terminal"
-echo "2. Run python ./server/openai_plugin_seed.py' to seed the plugin with data."
-echo
-
 print_header "START PLUGIN API"
 echo "Run the following command to start the Plugin API"
 echo "'poetry run start'"
+
+print_header "DATA SEEDING"
+echo "Let's get a sample document loaded into Redis. You must do the following after the API has started:"
+echo "1. Open a new Terminal"
+echo "2. Run 'python ./server/openai_plugin_seed.py' to seed the plugin with data."
+echo
+
+print_header "OPENAI PLUGIN"
+echo "Now you need to register the plugin with OpenAI."
+echo "You can get the plugin endpoint by running: 'python ./server/openai_plugin_hostname.py'"

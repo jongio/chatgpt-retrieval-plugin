@@ -1,6 +1,8 @@
 import os
 import subprocess
-import requests
+import json
+from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 from openai_plugin_hostname import get_plugin_hostname  # Import the function
 
 # Check if the first argument is "azd"
@@ -28,8 +30,19 @@ data = {
     ]
 }
 
-response = requests.post(f"{plugin_hostname}/upsert", headers=headers, json=data)
-print(response.text)
+# Convert the data dictionary to a JSON string
+data_json = json.dumps(data).encode('utf-8')
+
+# Create a Request object
+request = Request(f"{plugin_hostname}/upsert", data=data_json, headers=headers, method='POST')
+
+# Send the request and handle the response
+try:
+    response = urlopen(request)
+    response_text = response.read().decode('utf-8')
+    print(response_text)
+except HTTPError as e:
+    print(f"An HTTP error occurred: {e.code} {e.reason}")
 
 print("\nOpen the following URL to see the OpenAPI Spec")
 print(f"{plugin_hostname}/docs")

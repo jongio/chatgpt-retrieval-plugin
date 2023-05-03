@@ -45,7 +45,7 @@
         6379,
         8000
     ],
-    "postAttachCommand": ".devcontainer/setup.sh",
+    "postAttachCommand": ". .devcontainer/setup.sh",
     "remoteUser": "vscode",
     "hostRequirements": {
         "memory": "8gb"

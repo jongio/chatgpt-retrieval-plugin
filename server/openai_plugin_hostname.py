@@ -33,3 +33,8 @@ def get_plugin_hostname():
     print()
 
     return plugin_hostname
+
+# Check if the script is being run as the main module
+if __name__ == "__main__":
+    # If so, call the get_plugin_hostname() function
+    get_plugin_hostname()
