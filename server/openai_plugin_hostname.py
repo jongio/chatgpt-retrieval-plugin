@@ -2,6 +2,8 @@
 import os
 
 def normalize_url(url):
+    # Remove any single quotes and double quotes from the URL
+    url = url.replace("'", "").replace('"', '')
     if not url.startswith("https://"):
         url = "https://" + url
     return url.rstrip("/")
